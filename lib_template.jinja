@@ -1,4 +1,47 @@
-'''TEMPLATE: fill this in'''
+''' Simple signals library: allows emitting a signal from a charm and
+receiving it in another.
+
+Usage:
+```python
+class MyEchoCharm(CharmBase):
+    META = {"requires": {"signals": {"interface": "signals"}}}
+
+    def __init__(self, fw, key=None):
+        super().__init__(fw, key)
+        self.signals = Signals(self, "signals")
+        self.framework.observe(self.signals.on.receive, self._on_signal_receive) # type:ignore
+
+    def _on_signal_receive(self, event: SignalEvent):
+        if event.name == "ping":
+            self.signals.send("pong", event.payload)
+        else:
+            print(f"unrecognized signal: {event.name}")
+
+class MyEmitterCharm(CharmBase):
+    META = {"provides": {"signals": {"interface": "signals"}}}
+    ACTIONS = {"ping"}
+
+    def __init__(self, fw, key=None):
+        super().__init__(fw, key)
+        self.signals = Signals(self, "signals")
+        self.framework.observe(
+            self.on.ping_action, self._on_ping_action  # type:ignore
+        )
+        self.framework.observe(
+            self.signals.on.receive, self._on_signal_receive  # type:ignore
+        )
+
+    def _on_ping_action(self, _: ActionEvent):
+        self.signals.send("ping", "ming!")
+        print(f"ping: ming!")
+
+    def _on_signal_receive(self, event: SignalEvent):
+        if event.name == "pong":
+            print(f"pong: {event.payload}")
+        else:
+            print(f"unrecognized signal: {event.name}")
+```
+'''
 
 # The unique Charmhub library identifier, never change it
 LIBID = "52d4542f455b427099f02d78d18a78e0"

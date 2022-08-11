@@ -75,10 +75,10 @@ def test_emitter(emitter_harness):
     charm = emitter_harness.charm
     charm.ping()
 
-    assert charm.signals.listeners[0].data[charm.app]['ping'] == 'ming!'
+    assert charm.signals.channels[0].data[charm.app]['ping'] == 'ming!'
 
     charm.ping()
-    assert charm.signals.listeners[0].data[charm.app][
+    assert charm.signals.channels[0].data[charm.app][
                'ping'] == 'ming!' + charm.signals._padding
 
 
@@ -90,7 +90,7 @@ def test_echo_receive(echo_harness):
     echo_harness.add_relation_unit(r_id, "remote/0")
 
     charm = echo_harness.charm
-    relation = charm.signals.listeners[0]
+    relation = charm.signals.channels[0]
 
     echo_harness.update_relation_data(r_id, 'remote', {'ping': 'ming!'})
     assert charm.ping
@@ -112,7 +112,7 @@ def test_echo_bounce(echo_harness):
     echo_harness.add_relation_unit(r_id, "remote/0")
 
     charm = echo_harness.charm
-    relation = charm.signals.listeners[0]
+    relation = charm.signals.channels[0]
 
     echo_harness.update_relation_data(r_id, 'remote', {'ping': 'ming!'})
     assert relation.data[charm.app]['pong'] == 'ming!'
