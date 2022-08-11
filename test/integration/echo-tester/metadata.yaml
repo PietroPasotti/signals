@@ -1,0 +1,11 @@
+# Copyright 2022 pietro
+# See LICENSE file for licensing details.
+
+name: echo-tester
+display-name: echo
+description: bar
+summary: baz
+
+requires:
+  signals:
+    interface: signals
