@@ -1,5 +1,5 @@
-name: $CHARM_NAME  # $ TEMPLATE: Filled in by ./scripts/init.sh
+name: signals  # $ TEMPLATE: Filled in by ./scripts/init.sh
 description: |  
-  Library charm for: $LIB_NAME
+  Library charm for: signals
 summary: |
-  Library charm for: $LIB_NAME
+  Library charm for: signals

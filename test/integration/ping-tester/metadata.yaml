@@ -1,0 +1,11 @@
+# Copyright 2022 pietro
+# See LICENSE file for licensing details.
+
+name: ping-tester
+display-name: ping
+description: bar
+summary: baz
+
+provides:
+  signals:
+    interface: signals
