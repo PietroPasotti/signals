@@ -1,7 +1,7 @@
 # Signals
 
-When a unit is awakened by juju and given a chance to do something, we call that an Event.
-When a unit is awakened by juju and decides to notify **another unit** of some state change, we call that a Signal.
+When a unit checks in with juju and is given a chance to do something, we call that an Event.
+When a unit checks in with juju and decides to notify **another unit** of some state (change), we call that a Signal.
 Signals are therefore analogous to Events, but for remote observers.
 
 ## Usage
